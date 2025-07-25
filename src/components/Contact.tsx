@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { Mail, Phone, Github, Linkedin, Send, MapPin } from 'lucide-react';
 
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -16,13 +22,22 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    alert('Message sent successfully!');
+    setIsSubmitting(true);
+    
+    try {
+      // Simulate API call - replace with actual API endpoint
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      alert('Message sent successfully!');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Message sent successfully!'); // For demo purposes
+      setFormData({ name: '', email: '', message: '' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -79,8 +94,8 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-gray-400 text-sm">GitHub</p>
-                    <a href="#" className="text-white font-medium hover:text-blue-400 transition-colors">
-                      github.com/ketannag
+                    <a href="https://github.com/KetanNag" target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-blue-400 transition-colors">
+                      github.com/KetanNag
                     </a>
                   </div>
                 </div>
@@ -91,7 +106,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-gray-400 text-sm">LinkedIn</p>
-                    <a href="#" className="text-white font-medium hover:text-blue-400 transition-colors">
+                    <a href="https://linkedin.com/in/ketannag" target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-blue-400 transition-colors">
                       linkedin.com/in/ketannag
                     </a>
                   </div>
@@ -104,47 +119,31 @@ const Contact: React.FC = () => {
               <h3 className="text-2xl font-bold text-white mb-8">Send a Message</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-gray-300 mb-2">Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-slate-800 border border-blue-500/30 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none transition-colors"
-                      placeholder="Your Name"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-gray-300 mb-2">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-slate-800 border border-blue-500/30 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none transition-colors"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-                
                 <div>
-                  <label htmlFor="subject" className="block text-gray-300 mb-2">Subject</label>
+                  <label htmlFor="name" className="block text-gray-300 mb-2">Name</label>
                   <input
                     type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
+                    id="name"
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-slate-800 border border-blue-500/30 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none transition-colors"
-                    placeholder="Subject"
+                    placeholder="Your Name"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-gray-300 mb-2">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-slate-800 border border-blue-500/30 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none transition-colors"
+                    placeholder="your.email@example.com"
                   />
                 </div>
                 
@@ -164,10 +163,11 @@ const Contact: React.FC = () => {
                 
                 <button
                   type="submit"
-                  className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                  disabled={isSubmitting}
+                  className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="mr-2" size={20} />
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>

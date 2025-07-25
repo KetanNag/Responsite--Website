@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Download } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
@@ -49,8 +49,8 @@ const Hero: React.FC = () => {
           <div className="space-y-1">
             <div>const developer = {'{'}</div>
             <div className="ml-4">name: 'Ketan Nag',</div>
-            <div className="ml-4">skills: ['React', 'Node.js', 'Python'],</div>
-            <div className="ml-4">passion: 'Innovation'</div>
+            <div className="ml-4">skills: ['React', 'Node.js', 'Python', 'ML'],</div>
+            <div className="ml-4">passion: 'Innovation & Intelligence'</div>
             <div>{'}'}</div>
           </div>
         </div>
@@ -78,9 +78,8 @@ const Hero: React.FC = () => {
             </h2>
             
             <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Passionate about building innovative web solutions that bridge the gap between 
-              cutting-edge technology and user-centered design. I thrive on creating scalable 
-              applications that solve real-world problems.
+              Passionate about building scalable web solutions and intelligent systems that 
+              bridge the gap between cutting-edge technology and real-world applications.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
@@ -102,10 +101,10 @@ const Hero: React.FC = () => {
               <a href="mailto:ketannag6677@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
                 <Mail size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+              <a href="https://github.com/KetanNag" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
                 <Github size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+              <a href="https://linkedin.com/in/ketannag" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
                 <Linkedin size={24} />
               </a>
             </div>

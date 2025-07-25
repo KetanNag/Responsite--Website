@@ -13,17 +13,17 @@ const About: React.FC = () => {
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                I am a passionate Full Stack Developer with extensive experience in the MERN stack. 
-                My journey in technology is driven by an insatiable curiosity and eagerness to learn 
-                emerging technologies. I enjoy tackling complex problems and transforming ideas into 
-                elegant, functional solutions that make a real impact.
+                I am a passionate Full Stack Developer with extensive expertise in the MERN stack, 
+                specializing in both frontend and backend development. My journey in technology is 
+                driven by an insatiable curiosity for machine learning and intelligent systems, 
+                constantly exploring innovative ways to integrate AI-driven solutions into web applications.
               </p>
               
               <p className="text-lg text-gray-300 leading-relaxed">
-                With a strong foundation in both frontend and backend development, I specialize in 
-                creating seamless user experiences while ensuring robust, scalable backend architectures. 
-                My passion extends to machine learning, where I explore innovative ways to integrate 
-                AI-driven solutions into web applications.
+                With hands-on experience in building scalable applications, from university placement 
+                systems to AI-powered recommendation engines, I enjoy tackling complex problems and 
+                transforming ideas into elegant, functional solutions that make a real impact. My passion 
+                extends beyond coding to creating intelligent systems that solve real-world challenges.
               </p>
             </div>
             

@@ -3,34 +3,19 @@ import React from 'react';
 const Skills: React.FC = () => {
   const skillCategories = [
     {
-      title: 'Programming Languages',
-      skills: ['Python', 'JavaScript', 'HTML', 'CSS'],
+      title: 'Languages',
+      skills: ['Python', 'JavaScript', 'HTML', 'CSS', 'Java', 'SQL'],
       color: 'from-blue-500 to-blue-600'
     },
     {
-      title: 'Full Stack/Backend',
-      skills: ['Node.js', 'Express.js', 'MERN Stack'],
+      title: 'Frameworks/Tools',
+      skills: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Firebase'],
       color: 'from-green-500 to-green-600'
     },
     {
-      title: 'Frontend',
-      skills: ['React.js', 'PrimeReact', 'Material UI', 'Tailwind CSS'],
+      title: 'Others',
+      skills: ['Git', 'GitHub', 'Docker', 'Figma', 'OpenCV', 'Scikit-learn', 'Google Colab'],
       color: 'from-purple-500 to-purple-600'
-    },
-    {
-      title: 'Databases',
-      skills: ['MySQL'],
-      color: 'from-orange-500 to-orange-600'
-    },
-    {
-      title: 'Tools',
-      skills: ['Git', 'GitHub', 'JSON', 'Nodemailer'],
-      color: 'from-cyan-500 to-cyan-600'
-    },
-    {
-      title: 'ML Concepts',
-      skills: ['Machine Learning', 'Data Analysis', 'Python ML Libraries'],
-      color: 'from-pink-500 to-pink-600'
     }
   ];
 
@@ -42,7 +27,7 @@ const Skills: React.FC = () => {
             Technical <span className="text-blue-400">Skills</span>
           </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
             {skillCategories.map((category, index) => (
               <div
                 key={index}

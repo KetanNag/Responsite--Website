@@ -13,17 +13,17 @@ const Footer: React.FC = () => {
                 <span className="text-blue-400">K</span>etan<span className="text-blue-400">N</span>ag
               </h3>
               <p className="text-gray-300 mb-4">
-                Full Stack Developer passionate about creating innovative solutions 
-                and exploring the intersection of web development and machine learning.
+                Full Stack Developer & Machine Learning Enthusiast passionate about creating 
+                scalable web solutions and intelligent systems that solve real-world problems.
               </p>
               <div className="flex space-x-4">
                 <a href="mailto:ketannag6677@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors">
                   <Mail size={20} />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <a href="https://github.com/KetanNag" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
                   <Github size={20} />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <a href="https://linkedin.com/in/ketannag" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
                   <Linkedin size={20} />
                 </a>
               </div>
@@ -37,7 +37,9 @@ const Footer: React.FC = () => {
                   { href: '#home', label: 'Home' },
                   { href: '#about', label: 'About' },
                   { href: '#skills', label: 'Skills' },
-                  { href: '#projects', label: 'Projects' }
+                  { href: '#projects', label: 'Projects' },
+                  { href: '#experience', label: 'Experience' },
+                  { href: '#education', label: 'Education' }
                 ].map((link) => (
                   <li key={link.href}>
                     <a href={link.href} className="text-gray-300 hover:text-blue-400 transition-colors">
@@ -52,9 +54,22 @@ const Footer: React.FC = () => {
             <div>
               <h4 className="text-lg font-semibold text-white mb-4">Contact</h4>
               <ul className="space-y-2 text-gray-300">
-                <li>ketannag6677@gmail.com</li>
-                <li>+91-7991423664</li>
+                <li>
+                  <a href="mailto:ketannag6677@gmail.com" className="hover:text-blue-400 transition-colors">
+                    ketannag6677@gmail.com
+                  </a>
+                </li>
+                <li>
+                  <a href="tel:+917991423664" className="hover:text-blue-400 transition-colors">
+                    +91-7991423664
+                  </a>
+                </li>
                 <li>Ahmedabad, India</li>
+                <li>
+                  <a href="https://github.com/KetanNag" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
+                    GitHub Portfolio
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

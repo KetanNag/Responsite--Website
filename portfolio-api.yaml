@@ -1,0 +1,343 @@
+openapi: 3.0.3
+info:
+  title: Ketan Nag Portfolio API
+  description: API endpoints for the portfolio website functionality
+  version: 1.0.0
+  contact:
+    name: Ketan Nag
+    email: ketannag6677@gmail.com
+    url: https://github.com/KetanNag
+
+servers:
+  - url: https://example.com/api
+    description: Production server
+  - url: http://localhost:3001/api
+    description: Development server
+
+paths:
+  /contact:
+    post:
+      summary: Submit contact form
+      description: Endpoint to receive and process contact form submissions
+      tags:
+        - Contact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactForm'
+            examples:
+              basic_inquiry:
+                summary: Basic inquiry example
+                value:
+                  name: "John Doe"
+                  email: "john.doe@example.com"
+                  message: "Hi Ketan, I'd like to discuss a potential project opportunity."
+      responses:
+        '200':
+          description: Message sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /portfolio/stats:
+    get:
+      summary: Get portfolio statistics
+      description: Retrieve statistics about projects, technologies, and experience
+      tags:
+        - Portfolio
+      responses:
+        '200':
+          description: Portfolio statistics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioStats'
+
+  /projects:
+    get:
+      summary: Get all projects
+      description: Retrieve a list of all portfolio projects with filtering options
+      tags:
+        - Projects
+      parameters:
+        - name: technology
+          in: query
+          description: Filter projects by technology
+          required: false
+          schema:
+            type: string
+            example: "React"
+        - name: category
+          in: query
+          description: Filter projects by category
+          required: false
+          schema:
+            type: string
+            enum: [web, mobile, ml, fullstack]
+        - name: limit
+          in: query
+          description: Limit the number of results
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        '200':
+          description: Projects retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectsList'
+
+  /projects/{id}:
+    get:
+      summary: Get project details
+      description: Retrieve detailed information about a specific project
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier for the project
+          schema:
+            type: string
+            example: "student-placement-portal"
+      responses:
+        '200':
+          description: Project details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDetail'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /resume/download:
+    get:
+      summary: Download resume
+      description: Download the latest version of Ketan's resume in PDF format
+      tags:
+        - Resume
+      responses:
+        '200':
+          description: Resume downloaded successfully
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+
+components:
+  schemas:
+    ContactForm:
+      type: object
+      required:
+        - name
+        - email
+        - message
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          example: "John Doe"
+          description: "Full name of the person contacting"
+        email:
+          type: string
+          format: email
+          example: "john.doe@example.com"
+          description: "Valid email address for response"
+        message:
+          type: string
+          minLength: 10
+          maxLength: 1000
+          example: "Hi Ketan, I'd like to discuss a potential project opportunity."
+          description: "Message content"
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Message sent successfully"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-01-23T10:30:00Z"
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: "Invalid email format"
+        code:
+          type: string
+          example: "VALIDATION_ERROR"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-01-23T10:30:00Z"
+
+    PortfolioStats:
+      type: object
+      properties:
+        totalProjects:
+          type: integer
+          example: 5
+        technologiesUsed:
+          type: integer
+          example: 15
+        yearsOfExperience:
+          type: number
+          format: float
+          example: 1.5
+        certificationsEarned:
+          type: integer
+          example: 5
+        githubStats:
+          $ref: '#/components/schemas/GitHubStats'
+
+    GitHubStats:
+      type: object
+      properties:
+        publicRepos:
+          type: integer
+          example: 12
+        followers:
+          type: integer
+          example: 45
+        following:
+          type: integer
+          example: 30
+
+    ProjectsList:
+      type: object
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectSummary'
+        total:
+          type: integer
+          example: 5
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 10
+
+    ProjectSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "student-placement-portal"
+        title:
+          type: string
+          example: "Student Placement Portal"
+        description:
+          type: string
+          example: "A comprehensive university placement system with role-based access control"
+        technologies:
+          type: array
+          items:
+            type: string
+          example: ["React", "Node.js", "MySQL"]
+        category:
+          type: string
+          enum: [web, mobile, ml, fullstack]
+          example: "fullstack"
+        featured:
+          type: boolean
+          example: true
+        githubUrl:
+          type: string
+          format: uri
+          example: "https://github.com/KetanNag/student-placement-portal"
+        demoUrl:
+          type: string
+          format: uri
+          nullable: true
+          example: "https://demo.example.com"
+
+    ProjectDetail:
+      allOf:
+        - $ref: '#/components/schemas/ProjectSummary'
+        - type: object
+          properties:
+            features:
+              type: array
+              items:
+                type: string
+              example: ["Role-based Access", "Email Alerts", "Real-time Updates"]
+            challenges:
+              type: array
+              items:
+                type: string
+              example: ["Complex state management", "Real-time notifications"]
+            learnings:
+              type: array
+              items:
+                type: string
+              example: ["Advanced React patterns", "Database optimization"]
+            screenshots:
+              type: array
+              items:
+                type: string
+                format: uri
+              example: ["https://example.com/screenshot1.png"]
+            createdAt:
+              type: string
+              format: date
+              example: "2024-01-15"
+            updatedAt:
+              type: string
+              format: date
+              example: "2024-03-20"
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for accessing protected endpoints
+
+tags:
+  - name: Contact
+    description: Contact form and communication endpoints
+  - name: Portfolio
+    description: Portfolio statistics and overview data
+  - name: Projects
+    description: Project management and details
+  - name: Resume
+    description: Resume download and career information
